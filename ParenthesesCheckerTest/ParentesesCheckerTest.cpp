@@ -1,41 +1,59 @@
 #include "gmock\gmock.h"
 #include "ParenthesesChecker.h"
 
+#include <string>
+
+
+
 using namespace std;
 
-ParenthesesChecker parentheseschecker;
 
-TEST(ParenthesesCheckerTest, test_check_one_balanced_bracket)
+class ParenthesesCheckerTest : public ::testing::Test
+{
+protected:
+	virtual void SetUp()
+	{
+		
+	}
+
+	virtual void TearDown()
+	{
+		
+	}
+	ParenthesesChecker parentheseschecker;
+};
+
+TEST_F(ParenthesesCheckerTest, test_check_one_balanced_bracket)
 {
 	std::string exp = "[]";
 	ASSERT_TRUE(parentheseschecker.check(exp));
 }
 
-TEST(ParenthesesCheckerTest, test_check_two_balanced_bracket)
+TEST_F(ParenthesesCheckerTest, test_check_two_balanced_bracket)
 {
 	std::string exp = "[]()";
 	ASSERT_TRUE(parentheseschecker.check(exp));
 }
 
-TEST(ParenthesesCheckerTest, test_multiple_balanced_bracket)
+TEST_F(ParenthesesCheckerTest, test_multiple_balanced_bracket)
 {
 	string exp = "[({})]";
 	ASSERT_TRUE(parentheseschecker.check(exp));
 }
 
-TEST(ParenthesesCheckerTest, test_odd_length_input)
+TEST_F(ParenthesesCheckerTest, test_odd_length_input)
 {
 	string exp = "[](";
 	ASSERT_FALSE(parentheseschecker.check(exp));
 }
 
-TEST(ParenthesesCheckerTest, test_even_length_not_balanced)
+TEST_F(ParenthesesCheckerTest, test_even_length_not_balanced)
 {
 	string exp = "({)}";
 	ASSERT_FALSE(parentheseschecker.check(exp));
 }
 
-TEST(ParenthesesCheckerTest, test_reversed_bracket)
+TEST_F(ParenthesesCheckerTest, test_reversed_bracket)
 {
 	string exp = "{{)(}}";
 	ASSERT_FALSE(parentheseschecker.check(exp));

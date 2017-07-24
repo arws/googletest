@@ -23,7 +23,7 @@ bool ParenthesesChecker::check(string expression)
 
 void ParenthesesChecker::ReadByStack(std::string &expression, std::stack<char> &recorder)
 {
-	for (auto iter = expression.begin(); iter < expression.end(); iter++)
+	for (auto iter = expression.begin(); iter < expression.end(); ++iter)
 	{
 		if (IsRecorderEmpty(recorder))
 		{
