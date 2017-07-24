@@ -16,52 +16,52 @@ ParenthesesChecker::~ParenthesesChecker()
 
 bool ParenthesesChecker::check(string expression)
 {
-	stack<char> recorder;
-	ReadByStack(expression, recorder);
-	return AreParenthesesMatched(recorder);
+	
+	ReadByStack(expression);
+	return AreParenthesesMatched();
 }
 
-void ParenthesesChecker::ReadByStack(std::string &expression, std::stack<char> &recorder)
+void ParenthesesChecker::ReadByStack(std::string &expression)
 {
 	for (auto iter = expression.begin(); iter < expression.end(); ++iter)
 	{
-		if (IsRecorderEmpty(recorder))
+		if (IsRecorderEmpty())
 		{
-			RecordAChar(recorder, iter);
+			RecordAChar(iter);
 			continue;
 		}
 		else
 		{
-			if (IsStackTopMatched(recorder, iter))
-				MatchedAParenthese(recorder);
+			if (IsStackTopMatched(iter))
+				MatchedAParenthese();
 			else
-				RecordAChar(recorder, iter);
+				RecordAChar(iter);
 		}
 
 	}
 }
 
-void ParenthesesChecker::MatchedAParenthese(std::stack<char> & recorder)
+void ParenthesesChecker::MatchedAParenthese()
 {
-	recorder.pop();
+	this->recorder.pop();
 }
 
-bool ParenthesesChecker::IsStackTopMatched(std::stack<char> & recorder, std::_String_iterator<std::_String_val<std::_Simple_types<char>>> &iter)
+bool ParenthesesChecker::IsStackTopMatched(std::_String_iterator<std::_String_val<std::_Simple_types<char>>> &iter)
 {
-	return parentheses[recorder.top()] == *iter;
+	return parentheses[this->recorder.top()] == *iter;
 }
 
-void ParenthesesChecker::RecordAChar(std::stack<char> & recorder, std::_String_iterator<std::_String_val<std::_Simple_types<char>>> &iter)
+void ParenthesesChecker::RecordAChar(std::_String_iterator<std::_String_val<std::_Simple_types<char>>> &iter)
 {
-	recorder.push(*iter);
+	this->recorder.push(*iter);
 }
 
-bool ParenthesesChecker::AreParenthesesMatched(std::stack<char> &recorder)
+bool ParenthesesChecker::AreParenthesesMatched()
 {
-	return recorder.empty();
+	return this->recorder.empty();
 }
 
-bool ParenthesesChecker::IsRecorderEmpty(std::stack<char> &recorder)
+bool ParenthesesChecker::IsRecorderEmpty()
 {
-	return recorder.empty();
+	return this->recorder.empty();
 }
