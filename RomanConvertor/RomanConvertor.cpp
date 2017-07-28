@@ -51,6 +51,7 @@ string RomanConvertor::GetRomanAlphabet(int integer, int count)
 	{
 		return string(1, digit_roman_convert_map[integer * 5]);
 	}
+
 	return string(count, digit_roman_convert_map[integer]);
 }
 
